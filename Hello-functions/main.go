@@ -23,6 +23,9 @@ func paintNeeded(width float64, height float64) (float64, error) {
 func double(number float64) float64 {
 	return number * number
 }
+func doublePointer(number *float64) {
+	*number *= 2
+}
 func main() {
 	repeatLine("Hola", 2)
 	area, err := paintNeeded(2, 4)
@@ -31,11 +34,22 @@ func main() {
 	}
 	fmt.Printf("Total area: %.2f\n", area)
 
+	amount := double(2)
+	fmt.Println("double: ", amount)
+	fmt.Println("double: ", &amount) //print addr
+
+	amount = 6
+	doublePointer(&amount)
+	fmt.Println(amount)
+
+	myInt := 4
+	myIntPoint := &myInt
+	fmt.Println("myInt:", myInt)
+	fmt.Println(*myIntPoint)
+
 	area, err = paintNeeded(-2, 4)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("Total area: %.2f\n", area)
-
-	fmt.Println("double: ", double(2))
 }

@@ -7,32 +7,32 @@ import (
 	"strconv"
 )
 
-func ReadFloats(fileName string) ([3]float64, error) {
+func ReadFloats(fileName string) ([]float64, error) {
 
-	var result [3]float64
+	var result []float64
 	file, err := os.Open(fileName)
 	if err != nil {
 		log.Fatal(err)
-		return result, err
+		return nil, err
 	}
-	i := 0
 	scanner := bufio.NewScanner(file)
+	var aux float64
 	for scanner.Scan() {
-		result[i], err = strconv.ParseFloat(scanner.Text(), 64)
+		aux, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			log.Fatal(err)
-			return result, err
+			return nil, err
 		}
-		i++
+		result = append(result, aux)
 	}
 
 	err = file.Close()
 	if err != nil {
 		log.Fatal(err)
-		return result, err
+		return nil, err
 	}
 	if scanner.Err() != nil {
-		return result, scanner.Err()
+		return nil, scanner.Err()
 	}
 
 	return result, nil

@@ -35,27 +35,32 @@ func arrays() {
 
 }
 
-func sliceReadFloats() {
-	numbers, err := read.ReadFloats("data.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+func average(numbers []float64) float64 {
 	var total float64 = 0
 	for _, number := range numbers {
 		total += number
 	}
 	count := float64(len(numbers))
-	fmt.Println("Average: ", total/count)
+	return total / count
 }
-func main() {
-	arrays()
 
-	sliceReadFloats()
+func sliceReadFloats() {
+	numbers, err := read.ReadFloats("data.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Average: ", average(numbers))
+}
 
+func slice() {
 	myArray := [5]string{"a", "e", "i", "o", "u"}
 	mySlice := myArray[1:4]
 	mySlice = append(mySlice, "z")
 	for _, item := range mySlice {
 		fmt.Println(item)
 	}
+}
+func main() {
+	arrays()
+	sliceReadFloats()
 }

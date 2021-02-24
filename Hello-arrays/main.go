@@ -1,8 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
 
-func main() {
+	"github.com/Practical.GO/Hello-arrays/read"
+)
+
+func arrays() {
 	var notes [3]string = [3]string{"do", "re", "mi"}
 	primes := [5]int{2, 3, 5, 7, 11}
 
@@ -27,4 +32,19 @@ func main() {
 		total += number
 	}
 	fmt.Println("Sum: ", total)
+
+}
+func main() {
+	arrays()
+
+	numbers, err := read.ReadFloats("data.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var total float64 = 0
+	for _, number := range numbers {
+		total += number
+	}
+	count := float64(len(numbers))
+	fmt.Println("Average: ", total/count)
 }
